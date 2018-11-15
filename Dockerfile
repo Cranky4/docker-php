@@ -20,5 +20,5 @@ RUN docker-php-ext-configure intl \
        bz2 \
        imap
 
-RUN apk del icu-dev mcrypt-dev bz2-dev
+RUN apk del icu-dev mcrypt-dev bz2-dev \
     && rm -rf /tmp/* /var/cache/apk/*
