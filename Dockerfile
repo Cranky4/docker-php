@@ -1,6 +1,6 @@
 FROM php:7.2.12-zts-alpine
 
-RUN wget http://security.ubuntu.com/ubuntu/pool/main/a/apt/apt_1.4_amd64.deb
+RUN wget http://security.ubuntu.com/ubuntu/pool/main/a/apt/apt_1.7.0_amd64.deb
 RUN apt-get install sudo
 
 # Install tools...
