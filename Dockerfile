@@ -1,4 +1,4 @@
-FROM circleci/php:7.0.22-apache-node-browsers
+FROM php:7.2.12-zts-alpine
 
 # Install tools...
 RUN sudo apt-get install -y zlib1g-dev libicu-dev libjpeg-dev libmcrypt-dev libbz2-dev
@@ -16,4 +16,5 @@ RUN docker-php-ext-configure intl \
        opcache \
        zip \
        exif \
-       bz2
+       bz2 \
+       imap
