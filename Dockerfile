@@ -1,5 +1,7 @@
 FROM php:7.2.12-zts-alpine
 
+RUN apt-get install sudo
+
 # Install tools...
 RUN sudo apt-get install -y zlib1g-dev libicu-dev libjpeg-dev libmcrypt-dev libbz2-dev
 
