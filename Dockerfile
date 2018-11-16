@@ -16,7 +16,7 @@ RUN set -xe \
         # for GD
         freetype-dev \
         libpng-dev  \
-        libjpeg-turbo-dev
+        libjpeg-turbo-dev \
     && docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
