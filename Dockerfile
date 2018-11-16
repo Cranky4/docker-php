@@ -13,6 +13,8 @@ RUN set -xe \
         git \
         pkgconf \
         re2c \
+        libicu-dev \
+        zlib1g-dev \
         # for GD
         freetype-dev \
         libpng-dev  \
