@@ -24,7 +24,7 @@ RUN set -xe \
         libzip-dev \
         zip \
         # git
-        git openssh \
+        git openssh bash \
     && docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
