@@ -23,6 +23,8 @@ RUN set -xe \
         libjpeg-turbo-dev \
         libzip-dev \
         zip \
+        # git
+        git \
     && docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
