@@ -15,6 +15,8 @@ RUN set -xe \
         re2c \
         icu-dev \
         libxml2-dev \
+        imap-dev \
+        openssl-dev \
         # for GD
         freetype-dev \
         libpng-dev  \
@@ -31,6 +33,7 @@ RUN set -xe \
     && docker-php-ext-configure pdo_mysql --with-pdo-mysql \
     && docker-php-ext-configure mbstring --enable-mbstring \
     && docker-php-ext-configure soap --enable-soap \
+    && docker-php-ext-configure imap --with-imap-ssl \
     && docker-php-ext-install -j$(nproc) \
         gd \
         bcmath \
@@ -40,9 +43,13 @@ RUN set -xe \
         pdo_mysql \
         mbstring \
         soap \
-        iconv
+        iconv \
+        imap
 
-RUN apk del .build-deps \
-    && rm -rf /tmp/* \
-    && rm -rf /app \
-    && mkdir /app
+#RUN apk del .build-deps \
+#    && rm -rf /tmp/* \
+#    && rm -rf /app \
+#    && mkdir /app
+
+RUN php -m
+RUN php -v
