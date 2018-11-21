@@ -21,6 +21,8 @@ RUN set -xe \
         freetype-dev \
         libpng-dev  \
         libjpeg-turbo-dev \
+        libzip-dev \
+        zip \
     && docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
@@ -34,6 +36,7 @@ RUN set -xe \
     && docker-php-ext-configure mbstring --enable-mbstring \
     && docker-php-ext-configure soap --enable-soap \
     && docker-php-ext-configure imap --with-imap-ssl \
+    && docker-php-ext-configure zip --with-libzip \
     && docker-php-ext-install -j$(nproc) \
         gd \
         bcmath \
@@ -44,7 +47,8 @@ RUN set -xe \
         mbstring \
         soap \
         iconv \
-        imap
+        imap \
+        zip
 
 #RUN apk del .build-deps \
 #    && rm -rf /tmp/* \
