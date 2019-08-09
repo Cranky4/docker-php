@@ -17,6 +17,7 @@ RUN set -xe \
         libxml2-dev \
         imap-dev \
         openssl-dev \
+        imagemagick-dev \
         # for GD
         freetype-dev \
         libpng-dev  \
@@ -24,7 +25,7 @@ RUN set -xe \
         libzip-dev \
         zip \
         # git
-        git openssh bash \
+        openssh bash \
     && docker-php-ext-configure gd \
         --with-gd \
         --with-freetype-dir=/usr/include/ \
@@ -52,10 +53,19 @@ RUN set -xe \
         imap \
         zip
 
+# Install PECL extensions
+RUN	pecl install imagick \
+	&& docker-php-ext-enable imagick
+
 #RUN apk del .build-deps \
 #    && rm -rf /tmp/* \
 #    && rm -rf /app \
 #    && mkdir /app
+
+# Iconv Fix, siehe https://github.com/docker-library/php/issues/240#issuecomment-305038173
+# Pimcore Issue: https://github.com/pimcore/pimcore/issues/3175
+RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 RUN php -m
 RUN php -v
