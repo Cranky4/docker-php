@@ -55,6 +55,10 @@ RUN set -xe \
 RUN	pecl install imagick \
 	&& docker-php-ext-enable imagick
 
+# fix work iconv library with alpine
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+
 #RUN apk del .build-deps \
 #    && rm -rf /tmp/* \
 #    && rm -rf /app \
