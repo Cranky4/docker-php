@@ -1,4 +1,4 @@
-FROM php:7.3.13-zts-alpine
+FROM php:7.4-zts-alpine
 
 RUN set -xe \
     && apk add --no-cache --virtual .build-deps \
@@ -26,11 +26,9 @@ RUN set -xe \
         zip \
         # git
         openssh bash \
+        # mbstring
+        oniguruma-dev \
     && docker-php-ext-configure gd \
-        --with-gd \
-        --with-freetype-dir=/usr/include/ \
-        --with-png-dir=/usr/include/ \
-        --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-configure bcmath --enable-bcmath \
     && docker-php-ext-configure intl --enable-intl \
     && docker-php-ext-configure pcntl --enable-pcntl \
@@ -39,7 +37,7 @@ RUN set -xe \
     && docker-php-ext-configure mbstring --enable-mbstring \
     && docker-php-ext-configure soap --enable-soap \
     && docker-php-ext-configure imap --with-imap-ssl \
-    && docker-php-ext-configure zip --with-libzip \
+    && docker-php-ext-configure zip \
     && docker-php-ext-install -j$(nproc) \
         gd \
         bcmath \
