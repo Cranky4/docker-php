@@ -55,7 +55,8 @@ RUN set -xe \
 RUN	pecl install imagick \
 	&& docker-php-ext-enable imagick
 
-# fix work iconv library with alpine
+# Iconv Fix, siehe https://github.com/docker-library/php/issues/240#issuecomment-305038173
+# Pimcore Issue: https://github.com/pimcore/pimcore/issues/3175
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv
 ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
@@ -63,11 +64,6 @@ ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 #    && rm -rf /tmp/* \
 #    && rm -rf /app \
 #    && mkdir /app
-
-# Iconv Fix, siehe https://github.com/docker-library/php/issues/240#issuecomment-305038173
-# Pimcore Issue: https://github.com/pimcore/pimcore/issues/3175
-RUN apk add --no-cache --repository http://dl-3.alpinelinux.org/alpine/edge/community gnu-libiconv
-ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
 
 RUN php -m
 RUN php -v
